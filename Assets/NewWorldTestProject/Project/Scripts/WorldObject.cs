@@ -21,6 +21,6 @@ public class WorldObject : MonoBehaviour
 
     protected virtual void Tick(float deltaTime)
     {
-
+        // Write the code to run each frame ...
     }
 }

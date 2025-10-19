@@ -15,71 +15,35 @@ namespace NewLandPackages
 
         #region Abs
 
-        public static int Abs(int value)
-        {
-            return value > 0 ? value : value * -1;
-        }
+        public static int Abs(int value) => value > 0 ? value : value * -1;
 
-        public static float Abs(float value)
-        {
-            return value > 0f ? value : value * -1f;
-        }
+        public static float Abs(float value) => value > 0f ? value : value * -1f;
 
-        public static double Abs(double value)
-        {
-            return value > 0d ? value : value * -1d;
-        }
+        public static double Abs(double value) => value > 0d ? value : value * -1d;
 
-        public static long Abs(long value)
-        {
-            return value > 0 ? value : value * -1;
-        }
+        public static long Abs(long value) => value > 0 ? value : value * -1;
 
         #endregion
         #region Max
 
-        public static int Max(int a, int b)
-        {
-            return a > b ? a : b;
-        }
+        public static int Max(int a, int b) => a > b ? a : b;
 
-        public static float Max(float a, float b)
-        {
-            return a > b ? a : b;
-        }
+        public static float Max(float a, float b) => a > b ? a : b;
 
-        public static double Max(double a, double b)
-        {
-            return a > b ? a : b;
-        }
+        public static double Max(double a, double b) => a > b ? a : b;
 
-        public static long Max(long a, long b)
-        {
-            return a > b ? a : b;
-        }
+        public static long Max(long a, long b) => a > b ? a : b;
 
         #endregion
         #region Min
 
-        public static int Min(int a, int b)
-        {
-            return a < b ? a : b;
-        }
+        public static int Min(int a, int b) => a < b ? a : b;
 
-        public static float Min(float a, float b)
-        {
-            return a < b ? a : b;
-        }
+        public static float Min(float a, float b) => a < b ? a : b;
 
-        public static double Min(double a, double b)
-        {
-            return a < b ? a : b;
-        }
+        public static double Min(double a, double b) => a < b ? a : b;
 
-        public static long Min(long a, long b)
-        {
-            return a < b ? a : b;
-        }
+        public static long Min(long a, long b) => a < b ? a : b;
 
         #endregion
 

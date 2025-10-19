@@ -2,47 +2,24 @@ namespace NewLandPackages
 {
     using System.Collections;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
 
     public class Root
     {
-        public int user_num
-        {
-            get;
-            set;
-        }
-        public string user_id
-        {
-            get;
-            set;
-        }
-        public string user_pw
-        {
-            get;
-            set;
-        }
-        public int user_price
-        {
-            get;
-            set;
-        }
-        public string user_name
-        {
-            get;
-            set;
-        }
-        public int user_status
-        {
-            get;
-            set;
-        }
+        public int user_num { get; set; }
+        public string user_id { get; set; }
+        public string user_pw { get; set; }
+        public int user_price { get; set; }
+        public string user_name { get; set; }
+        public int user_status { get; set; }
     }
 
     public class NW_NAccount : MonoBehaviour
     {
+        private const string ACCOUNT_SERVER_URL = "http://newland2019.kro.kr:8002/accounts";
+
         // login condition and user number
         public static bool login;
         public static int userNum;
@@ -68,12 +45,7 @@ namespace NewLandPackages
         private Animator inputFieldAnim;
 
         // logging data and current index
-        private string[] loggingData = new string[3]
-        {
-        ".",
-        "..",
-        "..."
-        };
+        private string[] loggingData = new string[3] { ".", "..", "..." };
 
         private int currentIndex;
 
@@ -132,7 +104,9 @@ namespace NewLandPackages
 
                     newLandAccountPanel.SetActive(false);
 
+#if UNITY_EDITOR
                     Debug.Log("로그인 성공!");
+#endif
 
                     break;
                 }
@@ -158,13 +132,15 @@ namespace NewLandPackages
 
         private IEnumerator LoadDataToWeb()
         {
-            UnityWebRequest www = UnityWebRequest.Get("http://newland2019.kro.kr:8002/accounts");
+            UnityWebRequest www = UnityWebRequest.Get(ACCOUNT_SERVER_URL);
 
             yield return www.SendWebRequest();
 
-            if (www.isNetworkError || www.isHttpError)
+            if (www.error != null)
             {
-                Debug.Log(www.error);
+#if UNITY_EDITOR
+                Debug.LogError(www.error);
+#endif
 
                 StopCoroutine(NewLandAccountLogin());
 
@@ -179,14 +155,8 @@ namespace NewLandPackages
             datas = JsonToObject<Root>(www.downloadHandler.text);
         }
 
-        private List<T> JsonToObject<T>(string jsonData)
-        {
-            return JsonConvert.DeserializeObject<List<T>>(jsonData);
-        }
+        private List<T> JsonToObject<T>(string jsonData) => JsonUtility.FromJson<List<T>>(jsonData);
 
-        public static Root GetAccount()
-        {
-            return datas[userNum];
-        }
+        public static Root GetAccount() => datas[userNum];
     }
 }

@@ -49,26 +49,24 @@ public class PickUpItem : MonoBehaviour
 
     private void PickUpItemHandle()
     {
-        if (currentPickUpItem != null)
+        if (currentPickUpItem == null)
         {
-            if (currentPickUpItemRigidbodyComponent == null)
-            {
-                currentPickUpItemRigidbodyComponent = currentPickUpItem.GetComponent<Rigidbody>();
-
-                currentPickUpItemRigidbodyComponent.constraints = RigidbodyConstraints.FreezeAll;
-            }
-
-            currentPickUpItem.transform.SetParent(transform);
-
-            currentPickUpItem.transform.localPosition = Vector3.forward * 3.5f;
+            return;
         }
+
+        if (currentPickUpItemRigidbodyComponent == null)
+        {
+            currentPickUpItemRigidbodyComponent = currentPickUpItem.GetComponent<Rigidbody>();
+
+            currentPickUpItemRigidbodyComponent.constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        currentPickUpItem.transform.SetParent(transform);
+
+        currentPickUpItem.transform.localPosition = Vector3.forward * 3.5f;
     }
 
-    // Null is return to false
-    private bool HasPickUpItem()
-    {
-        return currentPickUpItem != null;
-    }
+    private bool HasPickUpItem() => currentPickUpItem != null;
 
     private void PickUpItemDrop()
     {

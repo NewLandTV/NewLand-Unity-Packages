@@ -78,34 +78,36 @@ public class Player : MonoBehaviour
 
     private IEnumerator Swim()
     {
-        if (isSwim && !isEnergyLack)
-        {
-            while (swimTimer < 1f)
-            {
-                swimTimer += Time.deltaTime * 0.025f;
+        bool canSwim = isSwim && !isEnergyLack;
 
-                rigid.drag = Mathf.Lerp(0f, maxDrag, swimTimer);
-
-                yield return null;
-            }
-
-            rigid.useGravity = false;
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                transform.position += Vector3.up * swimJumpForce * Time.deltaTime;
-            }
-            else
-            {
-                rigid.useGravity = true;
-            }
-        }
-        else
+        if (!canSwim)
         {
             swimTimer = 0f;
 
             rigid.useGravity = true;
-            rigid.drag = 0;
+            rigid.linearDamping = 0;
+
+            yield break;
+        }
+
+        while (swimTimer < 1f)
+        {
+            swimTimer += Time.deltaTime * 0.025f;
+
+            rigid.linearDamping = Mathf.Lerp(0f, maxDrag, swimTimer);
+
+            yield return null;
+        }
+
+        rigid.useGravity = false;
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            transform.position += Vector3.up * swimJumpForce * Time.deltaTime;
+        }
+        else
+        {
+            rigid.useGravity = true;
         }
     }
 

@@ -8,10 +8,7 @@ public class TNT : WorldObject
     [SerializeField]
     private GameObject explositonArea;
 
-    public void Explosion(float time)
-    {
-        StartCoroutine(ExplosionCoroutine(time));
-    }
+    public void Explosion(float time) => StartCoroutine(ExplosionCoroutine(time));
 
     private IEnumerator ExplosionCoroutine(float time)
     {

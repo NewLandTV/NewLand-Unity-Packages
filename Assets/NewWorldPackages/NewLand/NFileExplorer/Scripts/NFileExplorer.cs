@@ -6,10 +6,7 @@ public class NFileExplorer : MonoBehaviour
 {
     private DirectoryInfo currentDirectory = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
-    private void Awake()
-    {
-        UpdateDirectory(currentDirectory);
-    }
+    private void Awake() => UpdateDirectory(currentDirectory);
 
     private void UpdateDirectory(DirectoryInfo newDirectoryInfo)
     {
@@ -17,12 +14,12 @@ public class NFileExplorer : MonoBehaviour
 
         for (int i = 0; i < currentDirectory.GetDirectories().Length; i++)
         {
-
+            // TODO: Get directories...
         }
 
         for (int i = 0; i < currentDirectory.GetFiles().Length; i++)
         {
-
+            // TODO: Get files...
         }
     }    
 }

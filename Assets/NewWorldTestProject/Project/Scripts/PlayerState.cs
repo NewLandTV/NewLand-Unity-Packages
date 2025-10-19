@@ -1,3 +1,4 @@
+using NewLandPackages;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,53 +11,23 @@ public class PlayerState : MonoBehaviour
     [SerializeField]
     private float maxHp;
     private float currentHp;
-    public float CurrentHP
-    {
-        get
-        {
-            return currentHp;
-        }
-    }
+    public float CurrentHP => currentHp;
     [SerializeField]
     private float maxPower;
     private float currentPower;
-    public float CurrentPOWER
-    {
-        get
-        {
-            return currentPower;
-        }
-    }
+    public float CurrentPOWER => currentPower;
     [SerializeField]
     private float maxEnergy;
     private float currentEnergy;
-    public float CurrentEnergy
-    {
-        get
-        {
-            return currentEnergy;
-        }
-    }
+    public float CurrentEnergy => currentEnergy;
     [SerializeField]
     private float maxHungry;
     private float currentHungry;
-    public float CurrentHUNGRY
-    {
-        get
-        {
-            return currentHungry;
-        }
-    }
+    public float CurrentHUNGRY => currentHungry;
     [SerializeField]
     private float maxThirst;
     private float currentThirst;
-    public float CurrentTHIRST
-    {
-        get
-        {
-            return currentThirst;
-        }
-    }
+    public float CurrentTHIRST => currentThirst;
 
     public enum StateType
     {
@@ -89,11 +60,11 @@ public class PlayerState : MonoBehaviour
 
     private void CheckValidValue()
     {
-        currentHp = currentHp > maxHp ? maxHp : currentHp < 0f ? 0f : currentHp;
-        currentPower = currentPower > maxHungry ? maxHungry : currentPower < 0f ? 0f : currentPower;
-        currentEnergy = currentEnergy > maxEnergy ? maxEnergy : currentEnergy < 0f ? 0f : currentEnergy;
-        currentHungry = currentHungry > maxHungry ? maxHungry : currentHungry < 0f ? 0f : currentHungry;
-        currentThirst = currentThirst > maxThirst ? maxThirst : currentThirst < 0f ? 0f : currentThirst;
+        currentHp = currentHp > maxHp ? maxHp : NMath.Max(currentHp, 0f);
+        currentPower = currentPower > maxHungry ? maxHungry : NMath.Max(currentPower, 0f);
+        currentEnergy = currentEnergy > maxEnergy ? maxEnergy : NMath.Max(currentEnergy, 0f);
+        currentHungry = currentHungry > maxHungry ? maxHungry : NMath.Max(currentHungry, 0f);
+        currentThirst = currentThirst > maxThirst ? maxThirst : NMath.Max(currentThirst, 0f);
     }
 
     private void UpdateState()
